@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:multi_timer/pages/groups.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:getwidget/components/appbar/gf_appbar.dart';
+import 'package:getwidget/components/button/gf_icon_button.dart';
+import 'package:getwidget/getwidget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +21,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Multi-Timer Home Page'),
     );
   }
 }
@@ -46,11 +50,27 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
+      appBar: GFAppBar (
+    leading:  GFIconButton(
+    icon: Icon(
+      Icons.message,
+      color: Colors.white,
+    ),
+    onPressed: () {},
+    type: GFButtonType.transparent,
+    ),
+    title: Text("GF Appbar"),
+    actions: <Widget>[
+    GFIconButton(
+    icon: Icon(
+    Icons.favorite,
+    color: Colors.white,
+    ),
+    onPressed: () {},
+    type: GFButtonType.transparent,
+    ),
+    ],
+    ),
       body: Center(
 
 
