@@ -1,108 +1,112 @@
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Circular Countdown Timer Demo',
       theme: ThemeData(
-
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Circular Countdown Timer'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({Key? key, this.title}) : super(key: key);
 
-  final String title;
+  final String? title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
   final int _duration = 10;
   final CountDownController _controller = CountDownController();
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(widget.title!),
       ),
       body: Center(
-
-
           child: CircularCountDownTimer(
             // Countdown duration in Seconds.
             duration: _duration,
+
             // Countdown initial elapsed Duration in Seconds.
             initialDuration: 0,
+
             // Controls (i.e Start, Pause, Resume, Restart) the Countdown Timer.
             controller: _controller,
+
             // Width of the Countdown Widget.
             width: MediaQuery.of(context).size.width / 2,
+
             // Height of the Countdown Widget.
             height: MediaQuery.of(context).size.height / 2,
+
             // Ring Color for Countdown Widget.
             ringColor: Colors.grey[300]!,
+
             // Ring Gradient for Countdown Widget.
             ringGradient: null,
+
             // Filling Color for Countdown Widget.
             fillColor: Colors.purpleAccent[100]!,
+
             // Filling Gradient for Countdown Widget.
             fillGradient: null,
+
             // Background Color for Countdown Widget.
-            backgroundColor: Colors.blue[800],
+            backgroundColor: Colors.purple[500],
+
             // Background Gradient for Countdown Widget.
             backgroundGradient: null,
 
             // Border Thickness of the Countdown Ring.
             strokeWidth: 20.0,
+
             // Begin and end contours with a flat edge and no extension.
             strokeCap: StrokeCap.round,
+
             // Text Style for Countdown Text.
             textStyle: const TextStyle(
               fontSize: 33.0,
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),
+
             // Format for the Countdown Text.
             textFormat: CountdownTextFormat.S,
+
             // Handles Countdown Timer (true for Reverse Countdown (max to 0), false for Forward Countdown (0 to max)).
             isReverse: false,
+
             // Handles Animation Direction (true for Reverse Animation, false for Forward Animation).
             isReverseAnimation: false,
+
             // Handles visibility of the Countdown Text.
             isTimerTextShown: true,
+
             // Handles the timer start.
             autoStart: false,
+
             // This Callback will execute when the Countdown Starts.
             onStart: () {
               // Here, do whatever you want
               debugPrint('Countdown Started');
             },
+
             // This Callback will execute when the Countdown Ends.
             onComplete: () {
               // Here, do whatever you want
@@ -143,8 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
             style: const TextStyle(color: Colors.white),
           ),
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.black),
-
+            backgroundColor: MaterialStateProperty.all(Colors.purple),
           ),
           onPressed: onPressed,
         ));
