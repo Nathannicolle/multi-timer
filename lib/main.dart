@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multi_timer/pages/groups.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:getwidget/components/appbar/gf_appbar.dart';
 import 'package:getwidget/components/button/gf_icon_button.dart';
@@ -112,7 +113,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const groups(title: "/test"))
+          );//_incrementCounter,
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
