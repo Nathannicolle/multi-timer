@@ -74,11 +74,10 @@ class _MyHomePageState extends State<MyHomePage> {
     ),
     ],
     ),
-      body: Center (
-        child: CircularCountDownTimer(width: 100, height: 100, duration: 60, fillColor: Colors.red, ringColor: Colors.blue,autoStart: true),
+      body: Column(
+        children: <Widget>[CircularCountDownTimer(width: 100, height: 100, duration: 60, fillColor: Colors.red, ringColor: Colors.blue,autoStart: true),],
 
-          ),
-
+      ),
     );
   }
 
