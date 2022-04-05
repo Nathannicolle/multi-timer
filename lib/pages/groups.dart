@@ -22,30 +22,77 @@ class groupsState extends State<groups> {
       ),
       body: Center(
 
-        child: GFCard(
-          boxFit: BoxFit.cover,
-          image: Image.asset('your asset image'),
-          title: GFListTile(
-            avatar: GFAvatar(
-              backgroundImage: AssetImage('your asset image'),
+        child: Column(
+
+          children: <Widget>[
+
+            GFCard(
+              boxFit: BoxFit.cover,
+              image: Image.asset('your asset image'),
+              title: GFListTile(
+                avatar: GFAvatar(
+                  backgroundImage: AssetImage('your asset image'),
+                ),
+                title: Text('Card Title'),
+                subTitle: Text('Card Sub Title'),
+              ),
+              content: Text("Some quick example text to build on the card"),
+              buttonBar: GFButtonBar(
+                children: <Widget>[
+                  GFButton(
+                    onPressed: () {},
+                    text: 'Buy',
+                  ),
+                  GFButton(
+                    onPressed: () {},
+                    text: 'Cancel',
+                  ),
+                ],
+              ),
             ),
-            title: Text('Card Title'),
-            subTitle: Text('Card Sub Title'),
-          ),
-          content: Text("Some quick example text to build on the card"),
-          buttonBar: GFButtonBar(
-            children: <Widget>[
-              GFButton(
-                onPressed: () {},
-                text: 'Buy',
+
+            GFCard(
+              boxFit: BoxFit.cover,
+              image: Image.asset('your asset image'),
+              title: GFListTile(
+                avatar: GFAvatar(
+                  backgroundImage: AssetImage('your asset image'),
+                ),
+                title: Text('Card Title'),
+                subTitle: Text('Card Sub Title'),
               ),
-              GFButton(
-                onPressed: () {},
-                text: 'Cancel',
+              content: Text("Some quick example text to build on the card"),
+              buttonBar: GFButtonBar(
+                children: <Widget>[
+                  GFButton(
+                    onPressed: () {},
+                    text: 'Buy',
+                  ),
+                  GFButton(
+                    onPressed: () {},
+                    text: 'Cancel',
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+
+
+            GFListTile(
+                titleText:'Title',
+                subTitleText:'Lorem ipsum dolor sit amet, consectetur adipiscing',
+                icon: Icon(Icons.favorite)
+            ),
+
+            GFListTile(
+                titleText:'Title',
+                subTitleText:'Lorem ipsum dolor sit amet, consectetur adipiscing',
+                icon: Icon(Icons.favorite)
+            ),
+
+          ],
+
         ),
+
 
       ),
     );
