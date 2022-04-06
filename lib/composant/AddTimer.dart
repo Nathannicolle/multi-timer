@@ -29,7 +29,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final int _duration = 10;
+  final int _duration = 60;
   final CountDownController _controller = CountDownController();
 
   @override

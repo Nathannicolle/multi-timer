@@ -1,4 +1,7 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'package:multi_timer/composant/AddTimer.dart';
 import 'package:multi_timer/pages/groups.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:getwidget/components/appbar/gf_appbar.dart';
@@ -138,7 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _button({required String title, VoidCallback? onPressed}) {
+Widget _button({required String title, VoidCallback? onPressed}) {
     return Expanded(
         child: ElevatedButton(
       child: Text(
