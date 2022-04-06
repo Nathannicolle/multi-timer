@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:multi_timer/composant/AddTimer.dart';
 import 'package:multi_timer/pages/groups.dart';

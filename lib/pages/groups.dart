@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 
@@ -15,6 +17,10 @@ class groupsState extends State<groups> {
   @override
   Widget build(BuildContext context) {
 
+    /*TextButton( // sur le main
+        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const groups(title: "title"))), child: Text("Les groupes")
+    ),*/
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Liste des groupes'),
@@ -22,71 +28,31 @@ class groupsState extends State<groups> {
       ),
       body: Center(
 
-        child: Column(
+        child: GridView.count(
 
+          mainAxisSpacing: 10,
+          crossAxisCount: 2,
           children: <Widget>[
 
-            GFCard(
-              boxFit: BoxFit.cover,
-              image: Image.asset('your asset image'),
-              title: GFListTile(
-                avatar: GFAvatar(
-                  backgroundImage: AssetImage('your asset image'),
-                ),
-                title: Text('Card Title'),
-                subTitle: Text('Card Sub Title'),
-              ),
-              content: Text("Some quick example text to build on the card"),
-              buttonBar: GFButtonBar(
-                children: <Widget>[
-                  GFButton(
-                    onPressed: () {},
-                    text: 'Buy',
-                  ),
-                  GFButton(
-                    onPressed: () {},
-                    text: 'Cancel',
-                  ),
-                ],
-              ),
+            Container(
+              padding: const EdgeInsets.all(8),
+              child: const Text("He'd have you all unravel at the", textAlign: TextAlign.center),
+              color: Colors.green[100],
+            ),
+            Container(
+              padding: const EdgeInsets.all(8),
+              child: const Text("He'd have you all unravel at the"),
+              color: Colors.green[100],
             ),
 
             GFCard(
-              boxFit: BoxFit.cover,
-              image: Image.asset('your asset image'),
+              titlePosition: GFPosition.end,
               title: GFListTile(
-                avatar: GFAvatar(
-                  backgroundImage: AssetImage('your asset image'),
-                ),
-                title: Text('Card Title'),
-                subTitle: Text('Card Sub Title'),
+                title: Text('Groupe Alpha1'),
               ),
-              content: Text("Some quick example text to build on the card"),
-              buttonBar: GFButtonBar(
-                children: <Widget>[
-                  GFButton(
-                    onPressed: () {},
-                    text: 'Buy',
-                  ),
-                  GFButton(
-                    onPressed: () {},
-                    text: 'Cancel',
-                  ),
-                ],
-              ),
-            ),
-
-
-            GFListTile(
-                titleText:'Title',
-                subTitleText:'Lorem ipsum dolor sit amet, consectetur adipiscing',
-                icon: Icon(Icons.favorite)
-            ),
-
-            GFListTile(
-                titleText:'Title',
-                subTitleText:'Lorem ipsum dolor sit amet, consectetur adipiscing',
-                icon: Icon(Icons.favorite)
+              content: Text('Groupe Alpha2'),
+              margin: EdgeInsets.symmetric(horizontal: 150, vertical: 0),
+              padding: EdgeInsets.symmetric(vertical: 10),
             ),
 
           ],
