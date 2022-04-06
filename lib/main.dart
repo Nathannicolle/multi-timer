@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:getwidget/components/appbar/gf_appbar.dart';
+import 'package:getwidget/components/avatar/gf_avatar.dart';
+import 'package:getwidget/shape/gf_avatar_shape.dart';
 
 void main() => runApp(const MyApp());
 
@@ -12,7 +15,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Circular Countdown Timer Demo',
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+
+        primarySwatch: Colors.blue,
+
       ),
       home: const MyHomePage(title: 'Circular Countdown Timer'),
     );
@@ -35,9 +40,16 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title!),
-      ),
+        appBar: GFAppBar(
+        leading: GFAvatar(
+        backgroundImage:AssetImage("assets/img/logo_mini.png"),
+       shape: GFAvatarShape.standard
+    ),
+    title: Text("Multi-timer app"),
+    actions: <Widget>[],
+
+    ),
+
       body: Center(
           child: CircularCountDownTimer(
             // Countdown duration in Seconds.
@@ -62,13 +74,13 @@ class _MyHomePageState extends State<MyHomePage> {
             ringGradient: null,
 
             // Filling Color for Countdown Widget.
-            fillColor: Colors.purpleAccent[100]!,
+            fillColor: Colors.red[500]!,
 
             // Filling Gradient for Countdown Widget.
             fillGradient: null,
 
             // Background Color for Countdown Widget.
-            backgroundColor: Colors.purple[500],
+            backgroundColor: Colors.blue[500],
 
             // Background Gradient for Countdown Widget.
             backgroundGradient: null,
@@ -134,10 +146,10 @@ class _MyHomePageState extends State<MyHomePage> {
           _button(
               title: "Restart",
               onPressed: () => _controller.restart(duration: _duration))
-        ],
-      ),
+        ],)
     );
   }
+
 
   Widget _button({required String title, VoidCallback? onPressed}) {
     return Expanded(
@@ -153,3 +165,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ));
   }
 }
+
+
+
