@@ -1,8 +1,22 @@
-# multi_timer
+# multi-timer
+<img src="https://github.com/Nathannicolle/multi-timer/blob/main/logos/Multi-timer%20V2%20mini_transparent.png" style="height:300px;" alt="logo de l'app multi-timer">
+multi-timer est une application de gestion de timers (décompte) qui inclura un système de trames (exécution successive progammée de timers). L'app permettra notamment le partage à d'autres utilisateurs de ses timers via des liens ou un système de groupes d'utilisateurs.
 
-multi-timer project
+## Prerequisites
+* Install [Flutter](https://docs.flutter.dev/get-started/install)
+* Install [Android studio](https://developer.android.com/studio)
+* Setup [Android Studio for Flutter](https://docs.flutter.dev/get-started/editor)
 
-## Getting Started
+## Ressources
+* Find out logo [here](https://github.com/Nathannicolle/multi-timer/tree/main/logos)
+* Find out models [here](https://drive.google.com/drive/u/1/folders/1jQBQ7HvgpKGyAut-jJb22FYkr8m3y9Oz)
+
+## Get project
+To get the project you need to go into your desination folder and execute : <br>
+``git clone https://github.com/Nathannicolle/multi-timer/``
+
+
+## Getting Started with flutter
 
 This project is a starting point for a Flutter application.
 
