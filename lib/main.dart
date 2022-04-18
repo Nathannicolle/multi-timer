@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:getwidget/components/appbar/gf_appbar.dart';
@@ -40,6 +41,24 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: GFAppBar(
+          backgroundColor: Colors.transparent,
+            leading: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                GFAvatar(
+                  backgroundColor: Colors.transparent,
+                  backgroundImage: AssetImage("assets/img/logo_mini.png"),
+                  shape: GFAvatarShape.square,
+                ),
+                GFAvatar(
+                  backgroundColor: Colors.transparent,
+                  child: Icon(Icons.account_circle),
+                  shape: GFAvatarShape.circle,
+                ),
+              ]
+            )
+        ),
         backgroundColor: Color.fromRGBO(18, 18, 18, 1),
         body: Center(
             child: CircularCountDownTimer(
@@ -142,13 +161,14 @@ class _MyHomePageState extends State<MyHomePage> {
         bottomNavigationBar: BottomNavigationBar(
             backgroundColor: Color.fromRGBO(57, 57, 57, 1),
             items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home)),
-              BottomNavigationBarItem(label: 'Timers', icon: Icon(Icons.timer)),
-              BottomNavigationBarItem(label: 'Trames', icon: Icon(Icons.timer)),
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(icon: Icon(Icons.timer), label: 'Timers'),
               BottomNavigationBarItem(
-                  label: 'Groupes', icon: Icon(Icons.group)),
+                  icon: Icon(Icons.pending_actions), label: 'Trames'),
               BottomNavigationBarItem(
-                  label: 'Compte', icon: Icon(Icons.verified_user))
+                  icon: Icon(Icons.supervised_user_circle), label: 'Groupes'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.account_circle), label: 'Compte')
             ]));
   }
 
