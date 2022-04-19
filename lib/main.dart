@@ -47,24 +47,17 @@ class _MyHomePageState extends State<MyHomePage> {
               backgroundColor: Colors.transparent,
               elevation: 0,
               shadowColor: Colors.grey,
-              leading: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    GFAvatar(
-                      size: 2,
-                      backgroundColor: Colors.transparent,
-                      backgroundImage: AssetImage("assets/img/logo_mini.png"),
-                      shape: GFAvatarShape.square,
-                    ),
-                    GFAvatar(
-                      size: 2,
-                      backgroundColor: Colors.transparent,
-                      child: Icon(Icons.account_circle),
-                      shape: GFAvatarShape.circle,
-                    ),
-                  ]
-              )
+              leading: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                child: Image.asset("assets/img/logo_mini.png", width: 200.0, height: 200.0),
+              ),
+              actions: [
+                IconButton (
+                  iconSize: 30,
+                  icon: Icon(Icons.account_circle),
+                  onPressed: () => {},
+                )
+              ]
           ),
         ),
         backgroundColor: Color.fromRGBO(18, 18, 18, 1),
