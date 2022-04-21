@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-import 'package:getwidget/components/appbar/gf_appbar.dart';
-import 'package:getwidget/components/avatar/gf_avatar.dart';
-import 'package:getwidget/components/bottom_sheet/gf_bottom_sheet.dart';
-import 'package:getwidget/components/button/gf_icon_button.dart';
-import 'package:getwidget/shape/gf_avatar_shape.dart';
+import 'package:multi_timer/pages/ConnectPage.dart';
+import 'package:multi_timer/routes/AppRouter.dart';
 
 void main() => runApp(const MyApp());
 
@@ -15,12 +12,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: '/',
+      routes: AppRouter.getRoutes(),
       debugShowCheckedModeBanner: false,
       title: 'Circular Countdown Timer Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Circular Countdown Timer'),
+      // home: MyHomePage(title: 'Circular Countdown Timer'),
     );
   }
 }
@@ -38,6 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final int _duration = 10;
   final CountDownController _controller = CountDownController();
   final currentHour = DateTime.now().hour;
+  int _selectedIndex = 0;
 
   showHourMessage() {
     if (currentHour >= 0 && currentHour <= 7) {
@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 IconButton(
                   iconSize: 30,
                   icon: Icon(Icons.account_circle),
-                  onPressed: () => {},
+                  onPressed: () => { Navigator.pushNamed(context, ConnectPage.routeName) },
                 )
               ]),
         ),
@@ -207,7 +207,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   icon: Icon(Icons.supervised_user_circle), label: 'Groupes'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.account_circle), label: 'Compte')
-            ]));
+            ],
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+        )
+    );
   }
 
   Widget _button({required String title, VoidCallback? onPressed}) {
@@ -222,5 +226,26 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       onPressed: onPressed,
     ));
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      switch (_selectedIndex) {
+        case 0:
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MyHomePage()),
+          );
+          break;
+        case 4:
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const ConnectPage(title: '')),
+          );
+          break;
+      }
+    });
   }
 }
