@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
@@ -6,6 +8,7 @@ import 'package:getwidget/components/avatar/gf_avatar.dart';
 import 'package:getwidget/components/bottom_sheet/gf_bottom_sheet.dart';
 import 'package:getwidget/components/button/gf_icon_button.dart';
 import 'package:getwidget/shape/gf_avatar_shape.dart';
+import 'package:multi_timer/pages/groups.dart';
 
 void main() => runApp(const MyApp());
 
@@ -38,6 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final int _duration = 10;
   final CountDownController _controller = CountDownController();
   final currentHour = DateTime.now().hour;
+
+  int _selectedIndex = 0;
 
   showHourMessage() {
     if (currentHour >= 0 && currentHour <= 7) {
@@ -198,6 +203,8 @@ class _MyHomePageState extends State<MyHomePage> {
             type: BottomNavigationBarType.fixed,
             backgroundColor: Color.fromRGBO(57, 57, 57, 1),
             unselectedItemColor: Colors.grey,
+            currentIndex: _selectedIndex,
+            onTap: _onTap,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
               BottomNavigationBarItem(icon: Icon(Icons.timer), label: 'Timers'),
@@ -208,6 +215,15 @@ class _MyHomePageState extends State<MyHomePage> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.account_circle), label: 'Compte')
             ]));
+  }
+
+  void _onTap(int index) {
+    _selectedIndex = index;
+    setState(() {
+
+    });
+
+    if(index == 3) Navigator.push(context, MaterialPageRoute(builder: (context) => const groups(title: "title")));
   }
 
   Widget _button({required String title, VoidCallback? onPressed}) {
