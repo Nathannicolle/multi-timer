@@ -64,10 +64,12 @@ class _MyHomePageState extends State<MyHomePage> {
               backgroundColor: Colors.transparent,
               elevation: 0,
               shadowColor: Colors.grey,
-              leading: CircleAvatar(
-                backgroundColor: Colors.transparent,
-                child: Image.asset("assets/img/logo_mini.png",
-                    width: 200.0, height: 200.0),
+              leading: ElevatedButton(
+                style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)),
+                child: Image.asset("assets/img/logo_mini.png", height: 900, width: 900, fit: BoxFit.cover),
+                onPressed: () => {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const MyHomePage()))
+                },
               ),
               actions: [
                 IconButton(
