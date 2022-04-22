@@ -5,9 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:multi_timer/main.dart';
 
+import 'ConnectPage.dart';
+
 class groups extends StatefulWidget {
 
   const groups({Key? key, required this.title}) : super(key: key);
+
+  static const String routeName = "/groups";
+
   final String title;
 
   @override
@@ -108,8 +113,6 @@ class groupsState extends State<groups> {
             type: BottomNavigationBarType.fixed,
             backgroundColor: Color.fromRGBO(57, 57, 57, 1),
             unselectedItemColor: Colors.grey,
-            currentIndex: _selectedIndex,
-            onTap: _onTap,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
               BottomNavigationBarItem(icon: Icon(Icons.timer), label: 'Timers'),
@@ -119,17 +122,39 @@ class groupsState extends State<groups> {
                   icon: Icon(Icons.supervised_user_circle), label: 'Groupes'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.account_circle), label: 'Compte')
-            ])
+            ],
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+        )
     );
 
   }
 
-  void _onTap(int index) {
-    _selectedIndex = index;
+  void _onItemTapped(int index) {
     setState(() {
-
+      _selectedIndex = index;
+      switch (_selectedIndex) {
+        case 0:
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MyHomePage()),
+          );
+          break;
+        case 3:
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const groups(title: '')),
+          );
+          break;
+        case 4:
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const ConnectPage(title: '')),
+          );
+          break;
+      }
     });
-    if(index == 0) Navigator.push(context, MaterialPageRoute(builder: (context) => const MyHomePage(title: "title")));
   }
   
 }
