@@ -1,11 +1,21 @@
+import 'dart:developer';
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:multi_timer/main.dart';
+
+import 'ConnectPage.dart';
+import 'creategroup.dart';
+import 'groupusers.dart';
 
 class groups extends StatefulWidget {
 
   const groups({Key? key, required this.title}) : super(key: key);
+
+  static const String routeName = "/groups";
+
   final String title;
 
   @override
@@ -13,6 +23,8 @@ class groups extends StatefulWidget {
 }
 
 class groupsState extends State<groups> {
+
+  int _selectedIndex = 3;
 
   @override
   Widget build(BuildContext context) {
@@ -22,37 +34,129 @@ class groupsState extends State<groups> {
     ),*/
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Liste des groupes'),
-        backgroundColor: Colors.deepPurpleAccent,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(80.0),
+        child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            shadowColor: Colors.grey,
+            leading: CircleAvatar(
+              backgroundColor: Colors.transparent,
+              child: Image.asset("assets/img/logo_mini.png",
+                  width: 200.0, height: 200.0),
+            ),
+            actions: [
+              IconButton(
+                iconSize: 30,
+                icon: Icon(Icons.account_circle),
+                onPressed: () => {},
+              )
+            ]),
+      ),
+      backgroundColor: Color.fromRGBO(18, 18, 18, 1),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const creategroup(title: '')),
+        );},
+        backgroundColor: Colors.green,
+        child: const Icon(Icons.add),
       ),
       body: Center(
 
         child: GridView.count(
 
-          mainAxisSpacing: 10,
+          //mainAxisSpacing: 10,
+          padding: EdgeInsets.all(20),
           crossAxisCount: 2,
           children: <Widget>[
 
-            Container(
-              padding: const EdgeInsets.all(8),
-              child: const Text("He'd have you all unravel at the", textAlign: TextAlign.center),
-              color: Colors.green[100],
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              child: const Text("He'd have you all unravel at the"),
-              color: Colors.green[100],
+            GFCard(
+              title: GFListTile(
+                title: Text(''),
+                //subTitle: Text(''),
+              ),
+              margin: EdgeInsets.symmetric(vertical: 150, horizontal: 50),
+              color: Color.fromRGBO(57, 57, 57, 1),
+              content: Text("Groupe Alpha", style: TextStyle(color: Colors.white)),
+              buttonBar: GFButtonBar(
+                children: <Widget>[
+                  GFButton(
+                    onPressed: () {Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const groupusers(title: '')),
+                    );},
+                    text: 'info',
+                    icon: Icon(Icons.info),
+                  ),
+                ],
+              ),
             ),
 
             GFCard(
-              titlePosition: GFPosition.end,
               title: GFListTile(
-                title: Text('Groupe Alpha1'),
+                title: Text(''),
+                //subTitle: Text(''),
               ),
-              content: Text('Groupe Alpha2'),
-              margin: EdgeInsets.symmetric(horizontal: 150, vertical: 0),
-              padding: EdgeInsets.symmetric(vertical: 10),
+              margin: EdgeInsets.symmetric(vertical: 150, horizontal: 50),
+              color: Color.fromRGBO(57, 57, 57, 1),
+              content: Text("Groupe Beta", style: TextStyle(color: Colors.white)),
+              buttonBar: GFButtonBar(
+                children: <Widget>[
+                  GFButton(
+                    onPressed: () {Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const groupusers(title: '')),
+                    );},
+                    text: 'info',
+                    icon: Icon(Icons.info),
+                  ),
+                ],
+              ),
+            ),
+
+            GFCard(
+              title: GFListTile(
+                title: Text(''),
+                //subTitle: Text(''),
+              ),
+              margin: EdgeInsets.symmetric(vertical: 150, horizontal: 50),
+              color: Color.fromRGBO(57, 57, 57, 1),
+              content: Text("Groupe Omega", style: TextStyle(color: Colors.white)),
+              buttonBar: GFButtonBar(
+                children: <Widget>[
+                  GFButton(
+                    onPressed: () {Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const groupusers(title: '')),
+                    );},
+                    text: 'info',
+                    icon: Icon(Icons.info),
+                  ),
+                ],
+              ),
+            ),
+
+            GFCard(
+              title: GFListTile(
+                title: Text(''),
+                //subTitle: Text(''),
+              ),
+              margin: EdgeInsets.symmetric(vertical: 150, horizontal: 50),
+              color: Color.fromRGBO(57, 57, 57, 1),
+              content: Text("Groupe Delta", style: TextStyle(color: Colors.white)),
+              buttonBar: GFButtonBar(
+                children: <Widget>[
+                  GFButton(
+                    onPressed: () {Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const groupusers(title: '')),
+                    );},
+                    text: 'info',
+                    icon: Icon(Icons.info),
+                  ),
+                ],
+              ),
             ),
 
           ],
@@ -61,8 +165,53 @@ class groupsState extends State<groups> {
 
 
       ),
+
+        bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Color.fromRGBO(57, 57, 57, 1),
+            unselectedItemColor: Colors.grey,
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(icon: Icon(Icons.timer), label: 'Timers'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.pending_actions), label: 'Trames'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.supervised_user_circle), label: 'Groupes'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.account_circle), label: 'Compte')
+            ],
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+        )
     );
 
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      switch (_selectedIndex) {
+        case 0:
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MyHomePage()),
+          );
+          break;
+        case 3:
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const groups(title: '')),
+          );
+          break;
+        case 4:
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const ConnectPage(title: '')),
+          );
+          break;
+      }
+    });
   }
   
 }

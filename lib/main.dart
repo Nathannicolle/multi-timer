@@ -1,6 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:getwidget/components/appbar/gf_appbar.dart';
+import 'package:getwidget/components/avatar/gf_avatar.dart';
+import 'package:getwidget/components/bottom_sheet/gf_bottom_sheet.dart';
+import 'package:getwidget/components/button/gf_icon_button.dart';
+import 'package:getwidget/shape/gf_avatar_shape.dart';
+import 'package:multi_timer/pages/groups.dart';
 import 'package:multi_timer/pages/ConnectPage.dart';
 import 'package:multi_timer/routes/AppRouter.dart';
 
@@ -238,6 +246,12 @@ class _MyHomePageState extends State<MyHomePage> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const MyHomePage()),
+          );
+          break;
+        case 3:
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const groups(title: '')),
           );
           break;
         case 4:
