@@ -1,11 +1,14 @@
 import 'dart:developer';
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:multi_timer/main.dart';
 
 import 'ConnectPage.dart';
+import 'creategroup.dart';
+import 'groupusers.dart';
 
 class groups extends StatefulWidget {
 
@@ -51,6 +54,14 @@ class groupsState extends State<groups> {
             ]),
       ),
       backgroundColor: Color.fromRGBO(18, 18, 18, 1),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const creategroup(title: '')),
+        );},
+        backgroundColor: Colors.green,
+        child: const Icon(Icons.add),
+      ),
       body: Center(
 
         child: GridView.count(
@@ -60,43 +71,89 @@ class groupsState extends State<groups> {
           crossAxisCount: 2,
           children: <Widget>[
 
-            Container(
-              margin: EdgeInsets.all(50),
-              child: const Text("He'd have you all unravel at the", textAlign: TextAlign.center),
-              color: Colors.green[100],
-            ),
-            /*Container(
-              padding: const EdgeInsets.all(8),
-              child: const Text("He'd have you all unravel at the"),
-              color: Colors.green[100],
-            ),*/
-
-            GFCard(
-              titlePosition: GFPosition.end,
-              title: GFListTile(
-                title: Text('Groupe Alpha1'),
-              ),
-              content: Text('Groupe Alpha2'),
-              //margin: EdgeInsets.symmetric(horizontal: 150, vertical: 0),
-              //padding: EdgeInsets.symmetric(vertical: 10),
-            ),
-
             GFCard(
               title: GFListTile(
-                title: Text('Card Title'),
-                subTitle: Text('Card Sub Title'),
+                title: Text(''),
+                //subTitle: Text(''),
               ),
-              padding: const EdgeInsets.all(8),
-              content: Text("Some quick example text to build on the card"),
+              margin: EdgeInsets.symmetric(vertical: 150, horizontal: 50),
+              color: Color.fromRGBO(57, 57, 57, 1),
+              content: Text("Groupe Alpha", style: TextStyle(color: Colors.white)),
               buttonBar: GFButtonBar(
                 children: <Widget>[
                   GFButton(
-                    onPressed: () {},
-                    text: 'Buy',
+                    onPressed: () {Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const groupusers(title: '')),
+                    );},
+                    text: 'info',
+                    icon: Icon(Icons.info),
                   ),
+                ],
+              ),
+            ),
+
+            GFCard(
+              title: GFListTile(
+                title: Text(''),
+                //subTitle: Text(''),
+              ),
+              margin: EdgeInsets.symmetric(vertical: 150, horizontal: 50),
+              color: Color.fromRGBO(57, 57, 57, 1),
+              content: Text("Groupe Beta", style: TextStyle(color: Colors.white)),
+              buttonBar: GFButtonBar(
+                children: <Widget>[
                   GFButton(
-                    onPressed: () {},
-                    text: 'Cancel',
+                    onPressed: () {Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const groupusers(title: '')),
+                    );},
+                    text: 'info',
+                    icon: Icon(Icons.info),
+                  ),
+                ],
+              ),
+            ),
+
+            GFCard(
+              title: GFListTile(
+                title: Text(''),
+                //subTitle: Text(''),
+              ),
+              margin: EdgeInsets.symmetric(vertical: 150, horizontal: 50),
+              color: Color.fromRGBO(57, 57, 57, 1),
+              content: Text("Groupe Omega", style: TextStyle(color: Colors.white)),
+              buttonBar: GFButtonBar(
+                children: <Widget>[
+                  GFButton(
+                    onPressed: () {Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const groupusers(title: '')),
+                    );},
+                    text: 'info',
+                    icon: Icon(Icons.info),
+                  ),
+                ],
+              ),
+            ),
+
+            GFCard(
+              title: GFListTile(
+                title: Text(''),
+                //subTitle: Text(''),
+              ),
+              margin: EdgeInsets.symmetric(vertical: 150, horizontal: 50),
+              color: Color.fromRGBO(57, 57, 57, 1),
+              content: Text("Groupe Delta", style: TextStyle(color: Colors.white)),
+              buttonBar: GFButtonBar(
+                children: <Widget>[
+                  GFButton(
+                    onPressed: () {Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const groupusers(title: '')),
+                    );},
+                    text: 'info',
+                    icon: Icon(Icons.info),
                   ),
                 ],
               ),
