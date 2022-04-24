@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:searchfield/searchfield.dart';
 
 import '../main.dart';
 import 'ConnectPage.dart';
@@ -20,6 +21,7 @@ class groupadduser extends StatefulWidget {
 class groupadduserState extends State<groupadduser> {
 
   int _selectedIndex = 3;
+  List listUserNames = ['David', 'George'];
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +49,42 @@ class groupadduserState extends State<groupadduser> {
         backgroundColor: Color.fromRGBO(18, 18, 18, 1),
         body: Center(
 
-          child: GridView.count(
-
-            //mainAxisSpacing: 10,
-            padding: EdgeInsets.all(20),
-            crossAxisCount: 2,
-            children: <Widget>[],
-
+          child: Column(
+            children: [
+              SearchField(
+                hint: "Nom de l'utilisateur",
+                searchStyle: TextStyle(color: Colors.white),
+                searchInputDecoration: InputDecoration(
+                    hintStyle: TextStyle(color: Colors.white60),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blueGrey.shade200,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.blue,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                ),
+                marginColor: Colors.blue,
+                maxSuggestionsInViewPort: 6,
+                suggestionsDecoration: BoxDecoration(
+                  color: Color.fromRGBO(57, 57, 57, 1),
+                ),
+                suggestions: listUserNames.map((e) =>
+                    SearchFieldListItem(
+                    e,
+                    item: e,
+                    ),
+                )
+                .toList(),
+              ),
+            ],
           ),
 
 

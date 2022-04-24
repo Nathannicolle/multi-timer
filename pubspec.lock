@@ -142,6 +142,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  searchfield:
+    dependency: "direct main"
+    description:
+      name: searchfield
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.4"
   sky_engine:
     dependency: transitive
     description: flutter

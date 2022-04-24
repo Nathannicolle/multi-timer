@@ -30,6 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   getwidget: ^2.0.4
+  searchfield: ^0.6.4
 
 
 
