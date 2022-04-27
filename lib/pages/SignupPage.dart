@@ -38,7 +38,7 @@ class _SignupPageState extends State<SignupPage> {
               leading: ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.transparent)),
+                        MaterialStateProperty.all<Color>(Colors.transparent)),
                 child: Image.asset("assets/img/logo_mini.png",
                     height: 900, width: 900, fit: BoxFit.cover),
                 onPressed: () => {
@@ -53,52 +53,76 @@ class _SignupPageState extends State<SignupPage> {
                   iconSize: 30,
                   icon: Icon(Icons.account_circle),
                   onPressed: () =>
-                  {Navigator.pushNamed(context, ConnectPage.routeName)},
+                      {Navigator.pushNamed(context, ConnectPage.routeName)},
                 )
               ]),
         ),
         backgroundColor: Color.fromRGBO(18, 18, 18, 1),
         body: Container(
-            color: Colors.grey,
+            color: Colors.black,
             child: Column(
               children: <Widget>[
                 Text("S'inscrire",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: Colors.grey,
                         fontSize: 30)),
                 Form(
-                    child: Column(children: <Widget>[
-                      Text('Login'),
+                    child: FractionallySizedBox(
+                        child: Wrap(
+                            runSpacing: 20,
+                            alignment: WrapAlignment.center,
+                            children: <Widget>[
                       TextFormField(
+                          decoration: InputDecoration(
+                              fillColor: Colors.grey,
+                              filled: true,
+                              hintText: 'Login'),
                           autofocus: true,
                           initialValue: '',
                           onChanged: (value) {
                             itemValue = value;
                           }),
-                      Text('Prénom'),
                       TextFormField(
+                          decoration: InputDecoration(
+                              fillColor: Colors.grey,
+                              filled: true,
+                              hintText: 'Firstname'),
                           initialValue: '',
                           onChanged: (value) {
                             itemValue = value;
                           }),
-                      Text('Nom'),
                       TextFormField(
+                          decoration: InputDecoration(
+                              fillColor: Colors.grey,
+                              filled: true,
+                              hintText: 'Lastname'),
                           initialValue: '',
                           onChanged: (value) {
                             itemValue = value;
                           }),
-                      Text('Password'),
                       TextFormField(
+                          decoration: InputDecoration(
+                              fillColor: Colors.grey,
+                              filled: true,
+                              hintText: 'Password'),
                           obscureText: true,
                           enableSuggestions: false,
                           autocorrect: false,
                           initialValue: ''),
-                      ElevatedButton(onPressed: () => {}, child: Text('Connect'))
-                    ])
-                ),
-                Text('ou'),
-                TextButton(onPressed: () => { Navigator.push(context, MaterialPageRoute(builder: (context) => const ConnectPage(title: ''))) }, child: Text('Se connecter'))
+                      ElevatedButton(
+                          onPressed: () => {}, child: Text('Sign UP'))
+                    ]))),
+                Text('ou', style: TextStyle(color: Colors.grey)),
+                TextButton(
+                    onPressed: () => {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ConnectPage(title: '')))
+                        },
+                    child: Text('Se connecter'))
               ],
             )),
         bottomNavigationBar: BottomNavigationBar(

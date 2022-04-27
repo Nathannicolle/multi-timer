@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:multi_timer/main.dart';
 import 'package:multi_timer/pages/SignupPage.dart';
 
@@ -59,34 +60,48 @@ class _ConnectPageState extends State<ConnectPage> {
         ),
         backgroundColor: Color.fromRGBO(18, 18, 18, 1),
         body: Container(
-          color: Colors.grey,
             child: Column(
           children: <Widget>[
             Text("Se connecter",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: Colors.grey,
                     fontSize: 30)),
             Form(
-                child: Column(children: <Widget>[
-              Text('Login'),
+                child: FractionallySizedBox(
+                    child: Column(children: <Widget>[
               TextFormField(
-                  autofocus: true,
-                  initialValue: '',
-                  onChanged: (value) {
-                    itemValue = value;
-                  }),
-              Text('Password'),
+                decoration: InputDecoration(
+                    fillColor: Colors.grey, filled: true, hintText: 'Login'),
+                autofocus: true,
+                initialValue: '',
+                onChanged: (value) {
+                  itemValue = value;
+                },
+              ),
+              SizedBox(height: 20),
               TextFormField(
+                  decoration: InputDecoration(
+                      fillColor: Colors.grey,
+                      filled: true,
+                      hintText: 'Password'),
                   obscureText: true,
                   enableSuggestions: false,
                   autocorrect: false,
                   initialValue: ''),
-                  ElevatedButton(onPressed: () => {}, child: Text('Connect'))
-            ])
-            ),
-            Text('ou'),
-            TextButton(onPressed: () => { Navigator.push(context, MaterialPageRoute(builder: (context) => const SignupPage(title: ''))) }, child: Text('S\'inscrire'))
+              SizedBox(height: 20),
+              ElevatedButton(onPressed: () => {}, child: Text('Connect'))
+            ]))),
+            Text('ou', style: TextStyle(color: Colors.grey)),
+            TextButton(
+                onPressed: () => {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const SignupPage(title: '')))
+                    },
+                child: Text('S\'inscrire'))
           ],
         )),
         bottomNavigationBar: BottomNavigationBar(
