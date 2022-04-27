@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/components/button/gf_icon_button.dart';
 import 'package:getwidget/components/list_tile/gf_list_tile.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:multi_timer/pages/groupadduser.dart';
 
 import '../main.dart';
@@ -62,20 +64,32 @@ class groupusersState extends State<groupusers> {
               GFListTile(
                   title:Text('Louka-Fauvel', style: TextStyle(color: Colors.white)),
                   color: Color.fromRGBO(57, 57, 57, 1),
-                  icon: Icon(Icons.cancel),
-
+                  icon: GFIconButton(
+                    onPressed: (){},
+                    color: Colors.transparent,
+                    icon: Icon(Icons.cancel, color: Colors.white),
+                    shape: GFIconButtonShape.circle,
+                  ),
               ),
 
               GFListTile(
                   titleText:'Nathannicolle',
                   color: Colors.green,
-                  icon: Icon(Icons.cancel)
+                  icon: GFIconButton(
+                    onPressed: (){},
+                    icon: Icon(Icons.cancel, color: Colors.white),
+                    shape: GFIconButtonShape.circle,
+                  ),
               ),
 
               GFListTile(
                   titleText:'papi-luc',
                   color: Colors.green,
-                  icon: Icon(Icons.cancel)
+                  icon: GFIconButton(
+                    onPressed: (){},
+                    icon: Icon(Icons.cancel, color: Colors.white),
+                    shape: GFIconButtonShape.circle,
+                  ),
               ),
 
             ],

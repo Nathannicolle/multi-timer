@@ -80,6 +80,7 @@ class groupadduserState extends State<groupadduser> {
                     SearchFieldListItem(
                     e,
                     item: e,
+                    child: Text(e, style: TextStyle(color: Colors.white)),
                     ),
                 )
                 .toList(),
