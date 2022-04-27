@@ -111,7 +111,9 @@ class _SignupPageState extends State<SignupPage> {
                           autocorrect: false,
                           initialValue: ''),
                       ElevatedButton(
-                          onPressed: () => {}, child: Text('Sign UP'))
+                          onPressed: () => {
+
+                          }, child: Text('Sign UP'))
                     ]))),
                 Text('ou', style: TextStyle(color: Colors.grey)),
                 TextButton(
