@@ -1,17 +1,13 @@
-import 'dart:developer';
+ import 'dart:developer';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-import 'package:getwidget/components/appbar/gf_appbar.dart';
-import 'package:getwidget/components/avatar/gf_avatar.dart';
-import 'package:getwidget/components/bottom_sheet/gf_bottom_sheet.dart';
-import 'package:getwidget/components/button/gf_icon_button.dart';
-import 'package:getwidget/shape/gf_avatar_shape.dart';
 import 'package:multi_timer/pages/groups.dart';
 import 'package:multi_timer/pages/ConnectPage.dart';
 import 'package:multi_timer/routes/AppRouter.dart';
+import 'package:multi_timer/composant/timer.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,7 +50,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final int _duration = 10;
+  final int _duration = 30;
   final CountDownController _controller = CountDownController();
   final currentHour = DateTime.now().hour;
   int _selectedIndex = 0;
@@ -102,6 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Color.fromRGBO(18, 18, 18, 1),
         body: Center(
             child: Column(
+
           children: <Widget>[
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               SizedBox(
@@ -165,7 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
 
               // Format for the Countdown Text.
-              textFormat: CountdownTextFormat.S,
+              textFormat: CountdownTextFormat.HH_MM_SS,
 
               // Handles Countdown Timer (true for Reverse Countdown (max to 0), false for Forward Countdown (0 to max)).
               isReverse: false,
@@ -212,8 +209,20 @@ class _MyHomePageState extends State<MyHomePage> {
               width: 10,
             ),
             _button(
-                title: "Restart",
-                onPressed: () => _controller.restart(duration: _duration))
+                title: "Reset",
+                onPressed: ()  {
+                  _controller.restart(duration: _duration);
+                  _controller.pause();
+                }),
+            const SizedBox(
+              width: 10,
+            ),
+            _button(
+              title:"new timer",
+              onPressed: (){
+               Timer();
+              }
+            )
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
