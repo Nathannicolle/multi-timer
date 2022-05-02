@@ -130,15 +130,15 @@ class _SignupPageState extends State<SignupPage> {
                   _auth.createUserWithEmailAndPassword(email: email, password: password),
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      backgroundColor: Colors.blueGrey,
+                      backgroundColor: Colors.green,
                       content: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                            'Sucessfully Register.You Can Login Now'),
+                        child: Text('Sucessfully Register.You Can Login Now'),
                       ),
                       duration: Duration(seconds: 5),
                     ),
-                  )
+                  ),
+                  Navigator.of(context).pop()
                 },
                 child: Text('Register')
             )

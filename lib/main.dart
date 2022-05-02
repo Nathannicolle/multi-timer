@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
@@ -12,7 +13,18 @@ import 'package:multi_timer/pages/groups.dart';
 import 'package:multi_timer/pages/ConnectPage.dart';
 import 'package:multi_timer/routes/AppRouter.dart';
 
-void main() => runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  const config = FirebaseOptions(
+      apiKey: "AIzaSyBDnCMNxw0bJTIomp85Q6Hzt0kcoLZk5qo",
+      appId: "1:992167039447:web:8d486370119bcfc52afb92",
+      messagingSenderId: "992167039447",
+      projectId: "multi-timer-a3405"
+  );
+  await Firebase.initializeApp(options: config);
+
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
