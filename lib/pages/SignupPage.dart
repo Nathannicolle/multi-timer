@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_timer/main.dart';
 import 'package:multi_timer/pages/ConnectPage.dart';
@@ -23,8 +24,14 @@ class SignupPage extends StatefulWidget {
 ///
 
 class _SignupPageState extends State<SignupPage> {
+  final formkey = GlobalKey<FormState>();
+  final _auth = FirebaseAuth.instance;
+
   int _selectedIndex = 4;
   String itemValue = '';
+
+  String email = '';
+  String password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +45,11 @@ class _SignupPageState extends State<SignupPage> {
               leading: ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.transparent)),
+                    MaterialStateProperty.all<Color>(Colors.transparent)),
                 child: Image.asset("assets/img/logo_mini.png",
                     height: 900, width: 900, fit: BoxFit.cover),
-                onPressed: () => {
+                onPressed: () =>
+                {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -53,7 +61,7 @@ class _SignupPageState extends State<SignupPage> {
                   iconSize: 30,
                   icon: Icon(Icons.account_circle),
                   onPressed: () =>
-                      {Navigator.pushNamed(context, ConnectPage.routeName)},
+                  {Navigator.pushNamed(context, ConnectPage.routeName)},
                 )
               ]),
         ),
@@ -61,29 +69,31 @@ class _SignupPageState extends State<SignupPage> {
         body: Container(
             color: Colors.black,
             child: Column(
-              children: <Widget>[
+                children: <Widget>[
                 Text("S'inscrire",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                        fontSize: 30)),
-                Form(
-                    child: FractionallySizedBox(
-                        child: Wrap(
-                            runSpacing: 20,
-                            alignment: WrapAlignment.center,
-                            children: <Widget>[
-                      TextFormField(
-                          decoration: InputDecoration(
-                              fillColor: Colors.grey,
-                              filled: true,
-                              hintText: 'Login'),
-                          autofocus: true,
-                          initialValue: '',
-                          onChanged: (value) {
-                            itemValue = value;
-                          }),
-                      TextFormField(
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey,
+                    fontSize: 30)),
+            Form(
+              child: FractionallySizedBox(
+                  child: Wrap(
+                      runSpacing: 20,
+                      alignment: WrapAlignment.center,
+                      children: <Widget>[
+                  TextFormField(
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.email, color: Colors.black),
+                  fillColor: Colors.grey,
+                  filled: true,
+                  hintText: 'Email'),
+              autofocus: true,
+              initialValue: '',
+              onChanged: (value) {
+                email = value.toString().trim();
+              },
+            ),
+            /*TextFormField(
                           decoration: InputDecoration(
                               fillColor: Colors.grey,
                               filled: true,
@@ -100,48 +110,70 @@ class _SignupPageState extends State<SignupPage> {
                           initialValue: '',
                           onChanged: (value) {
                             itemValue = value;
-                          }),
-                      TextFormField(
-                          decoration: InputDecoration(
-                              fillColor: Colors.grey,
-                              filled: true,
-                              hintText: 'Password'),
-                          obscureText: true,
-                          enableSuggestions: false,
-                          autocorrect: false,
-                          initialValue: ''),
-                      ElevatedButton(
-                          onPressed: () => {}, child: Text('Sign UP'))
-                    ]))),
-                Text('ou', style: TextStyle(color: Colors.grey)),
-                TextButton(
-                    onPressed: () => {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ConnectPage(title: '')))
-                        },
-                    child: Text('Se connecter'))
-              ],
-            )),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Color.fromRGBO(57, 57, 57, 1),
-          unselectedItemColor: Colors.grey,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.timer), label: 'Timers'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.pending_actions), label: 'Trames'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.supervised_user_circle), label: 'Groupes'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle), label: 'Compte')
-          ],
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-        ));
+                          }),*/
+            TextFormField(
+              decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.lock, color: Colors.black),
+                  fillColor: Colors.grey,
+                  filled: true,
+                  hintText: 'Password'),
+              obscureText: true,
+              enableSuggestions: false,
+              autocorrect: false,
+              initialValue: '',
+              onChanged: (value) {
+                password = value;
+              },
+            ),
+            ElevatedButton(
+                onPressed: () => {
+                  _auth.createUserWithEmailAndPassword(email: email, password: password),
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.blueGrey,
+                      content: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                            'Sucessfully Register.You Can Login Now'),
+                      ),
+                      duration: Duration(seconds: 5),
+                    ),
+                  )
+                },
+                child: Text('Register')
+            )
+    ]))),
+    Text('ou', style: TextStyle(color: Colors.grey)),
+    TextButton(
+    onPressed: () => {
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (context) =>
+    const ConnectPage(title: '')))
+    },
+    child: Text('Se connecter'))
+    ],
+    )),
+    bottomNavigationBar: BottomNavigationBar(
+    type: BottomNavigationBarType.fixed,
+    backgroundColor: Color.fromRGBO(57, 57, 57, 1),
+    unselectedItemColor: Colors.grey,
+    items: const <BottomNavigationBarItem>[
+    BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+    BottomNavigationBarItem(icon: Icon(Icons.timer), label: 'Timers'),
+    BottomNavigationBarItem(
+    icon: Icon(Icons.pending_actions), label: 'Trames'),
+    BottomNavigationBarItem(
+    icon: Icon(Icons.supervised_user_circle), label: 'Groupes'),
+    BottomNavigationBarItem(
+    icon: Icon(Icons.account_circle), label: 'Compte')
+    ],
+    currentIndex: _selectedIndex,
+    onTap: _onItemTapped
+    ,
+    )
+    );
   }
 
   void _onItemTapped(int index) {

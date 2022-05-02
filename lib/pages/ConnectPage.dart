@@ -72,6 +72,7 @@ class _ConnectPageState extends State<ConnectPage> {
                     child: Column(children: <Widget>[
               TextFormField(
                 decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.email, color: Colors.black),
                     fillColor: Colors.grey, filled: true, hintText: 'Login'),
                 autofocus: true,
                 initialValue: '',
@@ -82,6 +83,7 @@ class _ConnectPageState extends State<ConnectPage> {
               SizedBox(height: 20),
               TextFormField(
                   decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.lock, color: Colors.black),
                       fillColor: Colors.grey,
                       filled: true,
                       hintText: 'Password'),
