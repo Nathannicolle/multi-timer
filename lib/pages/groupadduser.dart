@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/components/button/gf_button.dart';
 import 'package:searchfield/searchfield.dart';
 
 import '../main.dart';
@@ -85,6 +86,13 @@ class groupadduserState extends State<groupadduser> {
                 )
                 .toList(),
               ),
+
+              GFButton(
+                  onPressed: () => {},
+                  text:"Ajouter",
+                  color: Colors.green,
+              ),
+
             ],
           ),
 

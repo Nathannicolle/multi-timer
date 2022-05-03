@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/button/gf_icon_button.dart';
@@ -24,6 +26,7 @@ class groupusers extends StatefulWidget {
 class groupusersState extends State<groupusers> {
 
   int _selectedIndex = 3;
+  List listUserNames = ['Louka-Fauvel', 'Nathannicolle', 'papi-luc'];
 
   @override
   Widget build(BuildContext context) {
@@ -64,34 +67,36 @@ class groupusersState extends State<groupusers> {
               GFListTile(
                   title:Text('Louka-Fauvel', style: TextStyle(color: Colors.white)),
                   color: Color.fromRGBO(57, 57, 57, 1),
-                  icon: GFIconButton(
-                    onPressed: (){},
+                  icon: IconButton(
+                    iconSize: 30,
                     color: Colors.transparent,
                     icon: Icon(Icons.cancel, color: Colors.white),
-                    shape: GFIconButtonShape.circle,
+                    onPressed: () => {},
                   ),
               ),
 
               GFListTile(
-                  titleText:'Nathannicolle',
-                  color: Colors.green,
-                  icon: GFIconButton(
-                    onPressed: (){},
+                  title:Text('Nathannicolle', style: TextStyle(color: Colors.white)),
+                  color: Color.fromRGBO(57, 57, 57, 1),
+                  icon: IconButton(
+                    iconSize: 30,
+                    color: Colors.transparent,
                     icon: Icon(Icons.cancel, color: Colors.white),
-                    shape: GFIconButtonShape.circle,
+                    onPressed: () => {},
                   ),
               ),
 
               GFListTile(
-                  titleText:'papi-luc',
-                  color: Colors.green,
-                  icon: GFIconButton(
-                    onPressed: (){},
+                  title:Text('papi-luc', style: TextStyle(color: Colors.white)),
+                  color: Color.fromRGBO(57, 57, 57, 1),
+                  icon: IconButton(
+                    iconSize: 30,
+                    color: Colors.transparent,
                     icon: Icon(Icons.cancel, color: Colors.white),
-                    shape: GFIconButtonShape.circle,
+                    onPressed: () => {},
                   ),
               ),
-
+              //_listUsers(),
             ],
           )
 
@@ -145,5 +150,33 @@ class groupusersState extends State<groupusers> {
       }
     });
   }
+
+   /*Widget _listUsers(BuildContext context) {
+
+    return Row(children: [
+      listUserNames.map((e) => GFButton(onPressed: onPressed)),
+    ]);
+    listUserNames.map((e) => GFListTile(
+      title:Text("name", style: TextStyle(color: Colors.white)),
+      color: Color.fromRGBO(57, 57, 57, 1),
+      icon: IconButton(
+        iconSize: 30,
+        color: Colors.transparent,
+        icon: Icon(Icons.cancel, color: Colors.white),
+        onPressed: () => {},
+      ),
+    ),).toList();
+
+    /*return GFListTile(
+      title:Text("name", style: TextStyle(color: Colors.white)),
+      color: Color.fromRGBO(57, 57, 57, 1),
+      icon: IconButton(
+        iconSize: 30,
+        color: Colors.transparent,
+        icon: Icon(Icons.cancel, color: Colors.white),
+        onPressed: () => {},
+      ),
+    );*/
+  }*/
 
 }
