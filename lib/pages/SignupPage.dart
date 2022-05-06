@@ -27,7 +27,7 @@ class _SignupPageState extends State<SignupPage> {
   final formkey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
 
-  int _selectedIndex = 4;
+  int _selectedIndex = 5;
   String itemValue = '';
 
   String email = '';
@@ -133,7 +133,7 @@ class _SignupPageState extends State<SignupPage> {
                       backgroundColor: Colors.green,
                       content: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text('Sucessfully Register.You Can Login Now'),
+                        child: Text('Sucessfully Register as ' + email + '.You Can Login Now'),
                       ),
                       duration: Duration(seconds: 5),
                     ),

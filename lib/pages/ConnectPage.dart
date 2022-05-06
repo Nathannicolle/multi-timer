@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:multi_timer/main.dart';
+import 'package:multi_timer/pages/Dashboard.dart';
 import 'package:multi_timer/pages/SignupPage.dart';
 
 class ConnectPage extends StatefulWidget {
@@ -26,6 +28,10 @@ class ConnectPage extends StatefulWidget {
 class _ConnectPageState extends State<ConnectPage> {
   int _selectedIndex = 4;
   String itemValue = '';
+
+  final _auth = FirebaseAuth.instance;
+  String email = '';
+  String password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -73,11 +79,13 @@ class _ConnectPageState extends State<ConnectPage> {
               TextFormField(
                 decoration: InputDecoration(
                     prefixIcon: Icon(Icons.email, color: Colors.black),
-                    fillColor: Colors.grey, filled: true, hintText: 'Login'),
+                    fillColor: Colors.grey,
+                    filled: true,
+                    hintText: 'Login'),
                 autofocus: true,
                 initialValue: '',
                 onChanged: (value) {
-                  itemValue = value;
+                  email = value;
                 },
               ),
               SizedBox(height: 20),
@@ -90,9 +98,37 @@ class _ConnectPageState extends State<ConnectPage> {
                   obscureText: true,
                   enableSuggestions: false,
                   autocorrect: false,
-                  initialValue: ''),
+                  onChanged: (value) {
+                    password = value;
+                  }),
               SizedBox(height: 20),
-              ElevatedButton(onPressed: () => {}, child: Text('Connect'))
+              ElevatedButton(
+                  onPressed: () => {
+                        _auth.signInWithEmailAndPassword(
+                            email: email, password: password),
+                        FirebaseAuth.instance
+                            .authStateChanges()
+                            .listen((User? user) {
+                          if (user == null) {
+                            print('User is currently signed out!');
+                          } else {
+                            print('User is signed in!');
+                          }
+                        }),
+                        SnackBar(
+                          backgroundColor: Colors.green,
+                          content: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text('Sucessfully sign-in as ' + email),
+                          ),
+                          duration: Duration(seconds: 5),
+                        ),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const DashboardPage(title: '')),
+                        )
+                      },
+                  child: Text('Connect'))
             ]))),
             Text('ou', style: TextStyle(color: Colors.grey)),
             TextButton(
