@@ -33,6 +33,21 @@ class _SignupPageState extends State<SignupPage> {
   String email = '';
   String password = '';
 
+  static register(final _auth, String email,String password,BuildContext context) async {
+    _auth.createUserWithEmailAndPassword(email: email, password: password);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+      backgroundColor: Colors.green,
+      content: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text('Sucessfully Register as ' + email + '.You Can Login Now'),
+      ),
+      duration: Duration(seconds: 5),
+      ),
+    );
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,18 +142,7 @@ class _SignupPageState extends State<SignupPage> {
             ),
             ElevatedButton(
                 onPressed: () => {
-                  _auth.createUserWithEmailAndPassword(email: email, password: password),
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      backgroundColor: Colors.green,
-                      content: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Sucessfully Register as ' + email + '.You Can Login Now'),
-                      ),
-                      duration: Duration(seconds: 5),
-                    ),
-                  ),
-                  Navigator.of(context).pop()
+                  register(_auth, email, password, context)
                 },
                 child: Text('Register')
             )

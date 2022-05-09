@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:multi_timer/auth/authentication.dart';
 import 'package:multi_timer/main.dart';
 import 'package:multi_timer/pages/Dashboard.dart';
 import 'package:multi_timer/pages/SignupPage.dart';
@@ -32,6 +33,25 @@ class _ConnectPageState extends State<ConnectPage> {
   final _auth = FirebaseAuth.instance;
   String email = '';
   String password = '';
+
+  static connect(String email,String password,BuildContext context) async {
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password
+      );
+      //User is ok, so log in
+      AuthenticationProvider.of(context)?.login(credential.user);
+      Navigator.of(context).pushReplacementNamed('/Dashboard');
+
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,30 +124,8 @@ class _ConnectPageState extends State<ConnectPage> {
               SizedBox(height: 20),
               ElevatedButton(
                   onPressed: () => {
-                        _auth.signInWithEmailAndPassword(
-                            email: email, password: password),
-                        FirebaseAuth.instance
-                            .authStateChanges()
-                            .listen((User? user) {
-                          if (user == null) {
-                            print('User is currently signed out!');
-                          } else {
-                            print('User is signed in!');
-                          }
-                        }),
-                        SnackBar(
-                          backgroundColor: Colors.green,
-                          content: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text('Sucessfully sign-in as ' + email),
-                          ),
-                          duration: Duration(seconds: 5),
-                        ),
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const DashboardPage(title: '')),
-                        )
-                      },
+                    connect(email, password, context)
+                  },
                   child: Text('Connect'))
             ]))),
             Text('ou', style: TextStyle(color: Colors.grey)),
