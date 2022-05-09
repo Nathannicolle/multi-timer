@@ -6,7 +6,7 @@ import 'package:multi_timer/pages/groups.dart';
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key, required this.title}) : super(key: key);
 
-  static const String routeName = "/ConnectPage";
+  static const String routeName = "/Dashboard";
 
   final String title;
 

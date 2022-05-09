@@ -42,6 +42,16 @@ class _ConnectPageState extends State<ConnectPage> {
       );
       //User is ok, so log in
       AuthenticationProvider.of(context)?.login(credential.user);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.green,
+          content: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('Sucessfully login as ' + email),
+          ),
+          duration: Duration(seconds: 5),
+        ),
+      );
       Navigator.of(context).pushReplacementNamed('/Dashboard');
 
     } on FirebaseAuthException catch (e) {
