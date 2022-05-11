@@ -25,6 +25,7 @@ class groups extends StatefulWidget {
 class groupsState extends State<groups> {
 
   int _selectedIndex = 3;
+  List listGroupNames = ["Alpha", "Beta", "Omega", "Delta"];
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +159,7 @@ class groupsState extends State<groups> {
                 ],
               ),
             ),
-
+            _listGroups(),
           ],
 
         ),
@@ -212,6 +213,36 @@ class groupsState extends State<groups> {
           break;
       }
     });
+  }
+
+  Widget _listGroups() {
+
+    return Column(
+      children: List.generate(listGroupNames.length, (index) =>
+          GFCard(
+            title: GFListTile(
+              title: Text(''),
+              //subTitle: Text(''),
+            ),
+            margin: EdgeInsets.symmetric(vertical: 150, horizontal: 50),
+            color: Color.fromRGBO(57, 57, 57, 1),
+            content: Text("Groupe " + listGroupNames[index].toString(), style: TextStyle(color: Colors.white)),
+            buttonBar: GFButtonBar(
+              children: <Widget>[
+                GFButton(
+                  onPressed: () {Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const groupusers(title: '')),
+                  );},
+                  text: 'info',
+                  icon: Icon(Icons.info, color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+      ),
+    );
+
   }
   
 }
