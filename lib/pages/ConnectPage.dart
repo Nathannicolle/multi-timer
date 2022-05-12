@@ -141,11 +141,7 @@ class _ConnectPageState extends State<ConnectPage> {
             Text('ou', style: TextStyle(color: Colors.grey)),
             TextButton(
                 onPressed: () => {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const SignupPage(title: '')))
+                      Navigator.pushNamed(context, SignupPage.routeName)
                     },
                 child: Text('S\'inscrire'))
           ],

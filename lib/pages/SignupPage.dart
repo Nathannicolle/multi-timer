@@ -27,7 +27,7 @@ class _SignupPageState extends State<SignupPage> {
   final formkey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
 
-  int _selectedIndex = 5;
+  int _selectedIndex = 4;
   String itemValue = '';
 
   String email = '';
