@@ -64,39 +64,7 @@ class groupusersState extends State<groupusers> {
 
           child: Column(
             children: [
-              GFListTile(
-                  title:Text('Louka-Fauvel', style: TextStyle(color: Colors.white)),
-                  color: Color.fromRGBO(57, 57, 57, 1),
-                  icon: IconButton(
-                    iconSize: 30,
-                    color: Colors.transparent,
-                    icon: Icon(Icons.cancel, color: Colors.white),
-                    onPressed: () => {},
-                  ),
-              ),
-
-              GFListTile(
-                  title:Text('Nathannicolle', style: TextStyle(color: Colors.white)),
-                  color: Color.fromRGBO(57, 57, 57, 1),
-                  icon: IconButton(
-                    iconSize: 30,
-                    color: Colors.transparent,
-                    icon: Icon(Icons.cancel, color: Colors.white),
-                    onPressed: () => {},
-                  ),
-              ),
-
-              GFListTile(
-                  title:Text('papi-luc', style: TextStyle(color: Colors.white)),
-                  color: Color.fromRGBO(57, 57, 57, 1),
-                  icon: IconButton(
-                    iconSize: 30,
-                    color: Colors.transparent,
-                    icon: Icon(Icons.cancel, color: Colors.white),
-                    onPressed: () => {},
-                  ),
-              ),
-              //_listUsers(),
+              _listUsers(),
             ],
           )
 
@@ -151,32 +119,23 @@ class groupusersState extends State<groupusers> {
     });
   }
 
-   /*Widget _listUsers(BuildContext context) {
+   Widget _listUsers() {
 
-    return Row(children: [
-      listUserNames.map((e) => GFButton(onPressed: onPressed)),
-    ]);
-    listUserNames.map((e) => GFListTile(
-      title:Text("name", style: TextStyle(color: Colors.white)),
-      color: Color.fromRGBO(57, 57, 57, 1),
-      icon: IconButton(
-        iconSize: 30,
-        color: Colors.transparent,
-        icon: Icon(Icons.cancel, color: Colors.white),
-        onPressed: () => {},
+    return Column(
+      children: List.generate(listUserNames.length, (index) =>
+          GFListTile(
+            title:Text(listUserNames[index].toString(), style: TextStyle(color: Colors.white)),
+            color: Color.fromRGBO(57, 57, 57, 1),
+            icon: IconButton(
+              iconSize: 30,
+              color: Colors.transparent,
+              icon: Icon(Icons.cancel, color: Colors.white),
+              onPressed: () => {},
+            ),
+          ),
       ),
-    ),).toList();
+    );
 
-    /*return GFListTile(
-      title:Text("name", style: TextStyle(color: Colors.white)),
-      color: Color.fromRGBO(57, 57, 57, 1),
-      icon: IconButton(
-        iconSize: 30,
-        color: Colors.transparent,
-        icon: Icon(Icons.cancel, color: Colors.white),
-        onPressed: () => {},
-      ),
-    );*/
-  }*/
+  }
 
 }
