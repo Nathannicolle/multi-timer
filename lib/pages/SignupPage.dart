@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_timer/main.dart';
 import 'package:multi_timer/pages/ConnectPage.dart';
+import 'package:multi_timer/pages/groups.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key, required this.title}) : super(key: key);
@@ -188,6 +189,12 @@ class _SignupPageState extends State<SignupPage> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const MyHomePage()),
+          );
+          break;
+        case 3:
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const groups(title: '')),
           );
           break;
         case 4:

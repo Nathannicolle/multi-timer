@@ -5,6 +5,7 @@ import 'package:multi_timer/auth/authentication.dart';
 import 'package:multi_timer/main.dart';
 import 'package:multi_timer/pages/Dashboard.dart';
 import 'package:multi_timer/pages/SignupPage.dart';
+import 'package:multi_timer/pages/groups.dart';
 
 class ConnectPage extends StatefulWidget {
   const ConnectPage({Key? key, required this.title}) : super(key: key);
@@ -173,6 +174,12 @@ class _ConnectPageState extends State<ConnectPage> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const MyHomePage()),
+          );
+          break;
+        case 3:
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const groups(title: '')),
           );
           break;
         case 4:

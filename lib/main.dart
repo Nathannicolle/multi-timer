@@ -4,6 +4,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:multi_timer/auth/LoadingScreen.dart';
+import 'package:multi_timer/auth/auth_guard.dart';
+import 'package:multi_timer/auth/authentication.dart';
+import 'package:multi_timer/pages/Dashboard.dart';
+import 'package:multi_timer/pages/SignupPage.dart';
 import 'package:multi_timer/pages/groups.dart';
 import 'package:multi_timer/pages/ConnectPage.dart';
 import 'package:multi_timer/routes/AppRouter.dart';
@@ -29,13 +34,29 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       initialRoute: '/',
-      routes: AppRouter.getRoutes(),
+      routes: {
+        '/': (context) => MyHomePage(),
+        ConnectPage.routeName: (context) => ConnectPage(title: "ConnectPage"),
+        SignupPage.routeName: (context) => SignupPage(title: "Signup Page"),
+        DashboardPage.routeName: (context) => _authGuard(context, DashboardPage(title: '')),
+      },
       debugShowCheckedModeBanner: false,
       title: 'Circular Countdown Timer Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       // home: MyHomePage(title: 'Circular Countdown Timer'),
+    );
+  }
+
+  _authGuard(BuildContext context,Widget page){
+    return AuthGuard(
+      loadingScreen: LoadingScreen(),
+      unauthenticatedHandler: (BuildContext context) => Navigator.of(context).pushReplacementNamed("/ConnectPage"),
+      authenticationStream: AuthenticationProvider.of(context)?.user()
+          .map((user) => user == null ? AuthGuardStatus.notAuthenticated : AuthGuardStatus.authenticated),
+      child: page,
+
     );
   }
 }

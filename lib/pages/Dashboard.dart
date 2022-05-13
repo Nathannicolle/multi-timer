@@ -103,8 +103,6 @@ class _DashboardPageState extends State<DashboardPage> {
                 builder: (context) => const ConnectPage(title: '')),
           );
           break;
-        default :
-          break;
       }
     });
   }
