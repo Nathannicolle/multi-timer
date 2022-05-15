@@ -1,0 +1,4 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+fr/supavenir/multi_timer/BuildConfig.java
+ fr.supavenir.multi_timer.BuildConfig

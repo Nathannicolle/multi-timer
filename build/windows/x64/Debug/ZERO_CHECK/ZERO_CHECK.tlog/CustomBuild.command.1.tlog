@@ -1,0 +1,10 @@
+^C:\USERS\ASUS\DOCUMENTS\MULTITIMER\BUILD\WINDOWS\CMAKEFILES\018F5A6E18D10BCE905AF09B301D9BCE\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/ASUS/Documents/multitimer/windows -BC:/Users/ASUS/Documents/multitimer/build/windows --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/ASUS/Documents/multitimer/build/windows/multitimer.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
