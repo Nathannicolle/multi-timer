@@ -11,7 +11,6 @@ import 'package:multi_timer/pages/Dashboard.dart';
 import 'package:multi_timer/pages/SignupPage.dart';
 import 'package:multi_timer/pages/groups.dart';
 import 'package:multi_timer/pages/ConnectPage.dart';
-import 'package:multi_timer/routes/AppRouter.dart';
 import 'package:multi_timer/composant/timer.dart';
 
 Future<void> main() async {
