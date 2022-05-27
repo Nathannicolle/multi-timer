@@ -8,8 +8,10 @@ multi-timer est une application de gestion de timers (décompte) qui inclura un 
 * Setup [Android Studio for Flutter](https://docs.flutter.dev/get-started/editor)
 
 ## Ressources
-* Find out logo [here](https://github.com/Nathannicolle/multi-timer/tree/main/logos)
-* Find out models [here](https://drive.google.com/drive/u/1/folders/1jQBQ7HvgpKGyAut-jJb22FYkr8m3y9Oz)
+* Find out conceptions ressources/files (models, logos, database, MCD/CDM) [here](https://github.com/Nathannicolle/multi-timer/tree/main/conception)
+* Find out logo [here](https://github.com/Nathannicolle/multi-timer/tree/main/conception/Logos)
+* Find out models [here](https://github.com/Nathannicolle/multi-timer/tree/main/conception/Maquettes)
+* Find out MCD/CDM : [here](https://github.com/Nathannicolle/multi-timer/blob/main/conception/multi-timer.loo)
 
 ## Get project
 To get the project you need to go into your desination folder and execute : <br>
