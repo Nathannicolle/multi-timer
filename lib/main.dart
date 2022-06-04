@@ -26,36 +26,37 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+ class MyApp extends StatelessWidget {
+   const MyApp({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      initialRoute: '/',
-      routes: {
-        '/': (context) => MyHomePage(),
-        ConnectPage.routeName: (context) => ConnectPage(title: "ConnectPage"),
-        SignupPage.routeName: (context) => SignupPage(title: "Signup Page"),
-        DashboardPage.routeName: (context) => _authGuard(context, DashboardPage(title: '')),
-      },
-      debugShowCheckedModeBanner: false,
-      title: 'Circular Countdown Timer Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      // home: MyHomePage(title: 'Circular Countdown Timer'),
-    );
-  }
+   @override
+   Widget build(BuildContext context) {
+     return AuthenticationProvider(
+         child:MaterialApp(
+           initialRoute: '/',
+           routes: {
+             '/': (context) => MyHomePage(),
+             ConnectPage.routeName: (context) => ConnectPage(title: "ConnectPage"),
+             SignupPage.routeName: (context) => SignupPage(title: "Signup Page"),
+             DashboardPage.routeName: (context) => _authGuard(context, DashboardPage(title: '')),
+           },
+           debugShowCheckedModeBanner: false,
+           title: 'Circular Countdown Timer Demo',
+           theme: ThemeData(
+             primarySwatch: Colors.blue,
+           ),
+           // home: MyHomePage(title: 'Circular Countdown Timer'),
+         )
+     );
+   }
 
   _authGuard(BuildContext context,Widget page){
     return AuthGuard(
+      child: page,
       loadingScreen: LoadingScreen(),
       unauthenticatedHandler: (BuildContext context) => Navigator.of(context).pushReplacementNamed("/ConnectPage"),
       authenticationStream: AuthenticationProvider.of(context)?.user()
           .map((user) => user == null ? AuthGuardStatus.notAuthenticated : AuthGuardStatus.authenticated),
-      child: page,
-
     );
   }
 }
