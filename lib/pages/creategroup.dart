@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/components/button/gf_button.dart';
 
 import '../main.dart';
 import 'ConnectPage.dart';
@@ -20,6 +22,7 @@ class creategroup extends StatefulWidget {
 class creategroupState extends State<creategroup> {
 
   int _selectedIndex = 3;
+  final libelleController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +50,55 @@ class creategroupState extends State<creategroup> {
         backgroundColor: Color.fromRGBO(18, 18, 18, 1),
         body: Center(
 
-          child: GridView.count(
-
-            //mainAxisSpacing: 10,
-            padding: EdgeInsets.all(20),
-            crossAxisCount: 2,
-            children: <Widget>[],
-
+          child: Column(
+            children: [
+              Form(
+                child: Wrap(
+                  runSpacing: 20,
+                  alignment: WrapAlignment.center,
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(
+                        hintStyle: TextStyle(color: Colors.white60),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.blueGrey.shade200,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.blue,
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        prefixIcon: Icon(Icons.supervised_user_circle, color: Colors.white60),
+                        filled: true,
+                        hintText: 'Nom du groupe',
+                      ),
+                      style: TextStyle(color: Colors.white),
+                      autofocus: true,
+                      controller: libelleController,
+                    ),
+                    GFButton(
+                      onPressed: () {
+                        FirebaseFirestore.instance.collection('Groups').add({
+                          'libelle': libelleController.value.text,
+                        });
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const groups(title: '')),
+                        );
+                      },
+                      text:"Ajouter",
+                      color: Colors.green,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
 
 

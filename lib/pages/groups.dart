@@ -1,6 +1,8 @@
 import 'dart:developer';
+import 'dart:math';
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
@@ -25,6 +27,7 @@ class groups extends StatefulWidget {
 class groupsState extends State<groups> {
 
   int _selectedIndex = 3;
+  final Stream<QuerySnapshot> _groupsStream = FirebaseFirestore.instance.collection('Groups').orderBy('libelle').snapshots();
   List listGroupNames = ["Alpha", "Beta", "Omega", "Delta"];
 
   @override
@@ -65,104 +68,68 @@ class groupsState extends State<groups> {
       ),
       body: Center(
 
-        child: GridView.count(
+        child: StreamBuilder<QuerySnapshot>(
+          stream: _groupsStream,
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return Text('Something went wrong');
+            }
+
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Text("Loading");
+            }
+
+            return GridView(
+
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 2,
+                mainAxisSpacing: 4,
+                crossAxisSpacing: 4,
+              ),
+              children:
+                snapshot.data!.docs.map((DocumentSnapshot document) {
+                  Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+                  return _listGroups(data, document);
+                }).toList(),
+            );
+
+              /*ListView(
+              children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+                return ListTile(
+                  title: Text(data['nom'], style: TextStyle(color: Colors.blue)),
+                  subtitle: Text(snapshot.data!.docs.length.toString(), style: TextStyle(color: Colors.red)),
+                );
+              }).toList(),
+            );*/
+
+          },
+        ),
+
+        /*GridView.builder(
+
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 2,
+            mainAxisSpacing: 4,
+            crossAxisSpacing: 4,
+          ),
+          itemCount: listGroupNames.length,
+          itemBuilder: (context, index) {
+            final item = listGroupNames[index];
+
+            return _listGroups(item);
+          },
 
           //mainAxisSpacing: 10,
-          padding: EdgeInsets.all(20),
+          /*padding: EdgeInsets.all(20),
           crossAxisCount: 2,
           children: <Widget>[
-
-            GFCard(
-              title: GFListTile(
-                title: Text(''),
-                //subTitle: Text(''),
-              ),
-              margin: EdgeInsets.symmetric(vertical: 150, horizontal: 50),
-              color: Color.fromRGBO(57, 57, 57, 1),
-              content: Text("Groupe Alpha", style: TextStyle(color: Colors.white)),
-              buttonBar: GFButtonBar(
-                children: <Widget>[
-                  GFButton(
-                    onPressed: () {Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const groupusers(title: '')),
-                    );},
-                    text: 'info',
-                    icon: Icon(Icons.info, color: Colors.white),
-                  ),
-                ],
-              ),
-            ),
-
-            GFCard(
-              title: GFListTile(
-                title: Text(''),
-                //subTitle: Text(''),
-              ),
-              margin: EdgeInsets.symmetric(vertical: 150, horizontal: 50),
-              color: Color.fromRGBO(57, 57, 57, 1),
-              content: Text("Groupe Beta", style: TextStyle(color: Colors.white)),
-              buttonBar: GFButtonBar(
-                children: <Widget>[
-                  GFButton(
-                    onPressed: () {Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const groupusers(title: '')),
-                    );},
-                    text: 'info',
-                    icon: Icon(Icons.info, color: Colors.white),
-                  ),
-                ],
-              ),
-            ),
-
-            GFCard(
-              title: GFListTile(
-                title: Text(''),
-                //subTitle: Text(''),
-              ),
-              margin: EdgeInsets.symmetric(vertical: 150, horizontal: 50),
-              color: Color.fromRGBO(57, 57, 57, 1),
-              content: Text("Groupe Omega", style: TextStyle(color: Colors.white)),
-              buttonBar: GFButtonBar(
-                children: <Widget>[
-                  GFButton(
-                    onPressed: () {Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const groupusers(title: '')),
-                    );},
-                    text: 'info',
-                    icon: Icon(Icons.info, color: Colors.white),
-                  ),
-                ],
-              ),
-            ),
-
-            GFCard(
-              title: GFListTile(
-                title: Text(''),
-                //subTitle: Text(''),
-              ),
-              margin: EdgeInsets.symmetric(vertical: 150, horizontal: 50),
-              color: Color.fromRGBO(57, 57, 57, 1),
-              content: Text("Groupe Delta", style: TextStyle(color: Colors.white)),
-              buttonBar: GFButtonBar(
-                children: <Widget>[
-                  GFButton(
-                    onPressed: () {Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const groupusers(title: '')),
-                    );},
-                    text: 'info',
-                    icon: Icon(Icons.info, color: Colors.white),
-                  ),
-                ],
-              ),
-            ),
             _listGroups(),
-          ],
+          ],*/
 
-        ),
+        ),*/
 
 
       ),
@@ -215,34 +182,147 @@ class groupsState extends State<groups> {
     });
   }
 
-  Widget _listGroups() {
+  Widget _listGroups(Map<String, dynamic> group, DocumentSnapshot document) {
 
-    return Column(
-      children: List.generate(listGroupNames.length, (index) =>
-          GFCard(
-            title: GFListTile(
-              title: Text(''),
-              //subTitle: Text(''),
-            ),
-            margin: EdgeInsets.symmetric(vertical: 150, horizontal: 50),
-            color: Color.fromRGBO(57, 57, 57, 1),
-            content: Text("Groupe " + listGroupNames[index].toString(), style: TextStyle(color: Colors.white)),
-            buttonBar: GFButtonBar(
-              children: <Widget>[
-                GFButton(
-                  onPressed: () {Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const groupusers(title: '')),
-                  );},
-                  text: 'info',
-                  icon: Icon(Icons.info, color: Colors.white),
-                ),
-              ],
-            ),
+    return GestureDetector(
+      onLongPress: () => showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text('Option ' + group['libelle'].toString(), style: TextStyle(color: Colors.white)),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Modifier le nom du groupe :', style: TextStyle(color: Colors.white)),
+              GFButton(
+                onPressed: () => {_popupModifyGroup(group, document)},
+                text:"Modifier",
+                color: Colors.blue,
+              ),
+              Text('Supprimer le groupe :', style: TextStyle(color: Colors.white)),
+              GFButton(
+                onPressed: () => {_popupSupprGroup(group, document)},
+                text:"Supprimmer",
+                color: Colors.red,
+              ),
+            ],
           ),
+          backgroundColor: Color.fromRGBO(57, 57, 57, 1),
+        ),
+      ),
+      child: GFCard(
+        title: GFListTile(
+          title: Text(''),
+          //subTitle: Text(''),
+        ),
+        color: Color.fromRGBO(57, 57, 57, 1),
+        content: Text(group['libelle'], style: TextStyle(color: Colors.white)),
+        buttonBar: GFButtonBar(
+          children: <Widget>[
+            GFButton(
+              onPressed: () {Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const groupusers(title: '')),
+              );},
+              text: 'info',
+              icon: Icon(Icons.info, color: Colors.white),
+            ),
+          ],
+        ),
       ),
     );
 
+  }
+
+  Future<String?> _popupModifyGroup(Map<String, dynamic> group, DocumentSnapshot document) {
+    final libelleController = TextEditingController(text: group['libelle']);
+    return showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Text('Modifier le nom du groupe', style: TextStyle(color: Colors.white)),
+        content: TextField(
+          decoration: InputDecoration(
+            hintStyle: TextStyle(color: Colors.white60),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.blueGrey.shade200,
+                width: 1,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.blue,
+                width: 2,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            prefixIcon: Icon(Icons.supervised_user_circle, color: Colors.white60),
+            filled: true,
+            hintText: 'Nom du groupe',
+          ),
+          style: TextStyle(color: Colors.white),
+          autofocus: true,
+          controller: libelleController,
+        ),
+        actions: <Widget>[
+          GFButton(
+            onPressed: () => Navigator.pop(context, 'Non'),
+            text:"Annuler",
+            color: Colors.red,
+          ),
+          GFButton(
+            onPressed: () => {
+              FirebaseFirestore.instance.collection('Groups').doc(document.id).update({
+                'libelle': libelleController.value.text,
+              }),
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const groups(title: '')),
+              ),
+            },
+            text:"Modifier",
+            color: Colors.blue,
+          ),
+        ],
+        backgroundColor: Color.fromRGBO(57, 57, 57, 1),
+      ),
+    );
+  }
+
+  Future<String?> _popupSupprGroup(Map<String, dynamic> group, DocumentSnapshot document) {
+    return showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Text('Êtes-vous sûr de vouloir suprimmer le groupe ' + group['libelle'].toString() + ' ?', style: TextStyle(color: Colors.white)),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GFButton(
+                  onPressed: () => Navigator.pop(context, 'Non'),
+                  text:"Non",
+                  color: Colors.blue,
+                ),
+                GFButton(
+                  onPressed: () => {
+                    FirebaseFirestore.instance.collection('Groups').doc(document.id).delete(),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const groups(title: '')),
+                    ),
+                  },
+                  text:"Oui",
+                  color: Colors.red,
+                ),
+              ],
+            ),
+          ],
+        ),
+        backgroundColor: Color.fromRGBO(57, 57, 57, 1),
+      ),
+    );
   }
   
 }
