@@ -53,7 +53,7 @@ class _ConnectPageState extends State<ConnectPage> {
           duration: Duration(seconds: 5),
         ),
       );
-      Navigator.of(context).pushReplacementNamed('/Dashboard');
+      Navigator.of(context).pushNamed('/Dashboard');
 
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
