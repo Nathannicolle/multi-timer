@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multi_timer/auth/authentication.dart';
 import 'package:multi_timer/composant/timer.dart';
 import 'package:multi_timer/pages/ConnectPage.dart';
 import 'package:multi_timer/pages/groups.dart';
@@ -58,7 +59,12 @@ class _DashboardPageState extends State<DashboardPage> {
         backgroundColor: Color.fromRGBO(18, 18, 18, 1),
         body: Container(
           child: Center(
-            child: Text("Vous êtes connecté", textScaleFactor: 3, style: TextStyle(color: Colors.white))
+            child: Column(
+              children:  <Widget>[
+                Text("Vous êtes connecté", textScaleFactor: 3, style: TextStyle(color: Colors.white)),
+                TextButton(onPressed: () => { AuthenticationProvider.of(context)?.logout() }, child: Text("Déconnexion"))
+              ],
+            )
           )
         ),
         bottomNavigationBar: BottomNavigationBar(
