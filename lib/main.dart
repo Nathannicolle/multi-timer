@@ -78,7 +78,6 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
   showHourMessage() {
-    // final userAuth = AuthenticationProvider.of(context)?.user();
     final userAuth = FirebaseAuth.instance.currentUser?.email;
     String userAuthString = userAuth.toString();
     if (currentHour >= 0 && currentHour <= 7) {
@@ -86,11 +85,11 @@ class _MyHomePageState extends State<MyHomePage> {
           style: TextStyle(
               fontWeight: FontWeight.bold, color: Colors.grey, fontSize: 30));
     } else if (currentHour <= 23 && currentHour >= 18) {
-      return Text('Bonsoir' + userAuthString,
+      return Text('Bonsoir ' + userAuthString,
           style: TextStyle(
               fontWeight: FontWeight.bold, color: Colors.grey, fontSize: 30));
     } else {
-      return Text('Bonjour' + userAuthString,
+      return Text('Bonjour ' + userAuthString,
           style: TextStyle(
               fontWeight: FontWeight.bold, color: Colors.grey, fontSize: 30));
     }
