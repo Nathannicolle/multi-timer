@@ -79,7 +79,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   showHourMessage() {
     final userAuth = FirebaseAuth.instance.currentUser?.email;
-    String userAuthString = userAuth.toString();
+    String userAuthString = '';
+    if(userAuth == null) {
+      userAuthString = '';
+    } else {
+      userAuthString = userAuth.toString();
+    }
     if (currentHour >= 0 && currentHour <= 7) {
       return Text('Bonne nuit ' + userAuthString,
           style: TextStyle(
