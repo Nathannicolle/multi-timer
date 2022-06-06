@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/button/gf_icon_button.dart';
@@ -13,11 +14,12 @@ import 'groups.dart';
 
 class groupusers extends StatefulWidget {
 
-  const groupusers({Key? key, required this.title}) : super(key: key);
+  const groupusers({Key? key, required this.title, required this.idGroup}) : super(key: key);
 
   static const String routeName = "/groupusers";
 
   final String title;
+  final String idGroup;
 
   @override
   State<groupusers> createState() => groupusersState();
@@ -30,7 +32,7 @@ class groupusersState extends State<groupusers> {
 
   @override
   Widget build(BuildContext context) {
-
+    final Stream<QuerySnapshot> _groupUsersStream = FirebaseFirestore.instance.collection('Groups').doc(widget.idGroup).collection('Utilisateurs').orderBy('prenom').snapshots();
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(80.0),
@@ -62,11 +64,33 @@ class groupusersState extends State<groupusers> {
         ),
         body: Center(
 
-          child: Column(
+          child: StreamBuilder<QuerySnapshot>(
+            stream: _groupUsersStream,
+            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasError) {
+                return Text('Something went wrong');
+              }
+
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Text("Loading");
+              }
+
+              return Column(
+                children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                  Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+                  return _listUsersTest(data);
+                }).toList(),
+              );
+
+            },
+          ),
+
+          /*Column(
             children: [
               _listUsers(),
+
             ],
-          )
+          )*/
 
 
         ),
@@ -133,6 +157,21 @@ class groupusersState extends State<groupusers> {
               onPressed: () => {},
             ),
           ),
+      ),
+    );
+
+  }
+
+  Widget _listUsersTest(user) {
+
+    return GFListTile(
+      title:Text(user['prenom'] + ' ' + user['nom'], style: TextStyle(color: Colors.white)),
+      color: Color.fromRGBO(57, 57, 57, 1),
+      icon: IconButton(
+        iconSize: 30,
+        color: Colors.transparent,
+        icon: Icon(Icons.cancel, color: Colors.white),
+        onPressed: () => {},
       ),
     );
 
