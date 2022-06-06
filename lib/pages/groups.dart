@@ -94,16 +94,6 @@ class groupsState extends State<groups> {
                 }).toList(),
             );
 
-              /*ListView(
-              children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-                return ListTile(
-                  title: Text(data['nom'], style: TextStyle(color: Colors.blue)),
-                  subtitle: Text(snapshot.data!.docs.length.toString(), style: TextStyle(color: Colors.red)),
-                );
-              }).toList(),
-            );*/
-
           },
         ),
 
@@ -221,7 +211,7 @@ class groupsState extends State<groups> {
             GFButton(
               onPressed: () {Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const groupusers(title: '')),
+                MaterialPageRoute(builder: (context) => groupusers(title: '', idGroup: document.id)),
               );},
               text: 'info',
               icon: Icon(Icons.info, color: Colors.white),
