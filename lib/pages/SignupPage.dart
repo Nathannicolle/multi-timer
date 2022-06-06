@@ -26,11 +26,12 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   final formkey = GlobalKey<FormState>();
-  final _auth = FirebaseAuth.instance;
+
 
   int _selectedIndex = 4;
   String itemValue = '';
 
+  final _auth = FirebaseAuth.instance;
   String email = '';
   String password = '';
 

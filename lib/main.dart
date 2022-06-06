@@ -1,5 +1,6 @@
  import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -77,16 +78,19 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
   showHourMessage() {
+    // final userAuth = AuthenticationProvider.of(context)?.user();
+    final userAuth = FirebaseAuth.instance.currentUser?.email;
+    String userAuthString = userAuth.toString();
     if (currentHour >= 0 && currentHour <= 7) {
-      return const Text('Bonne nuit',
+      return Text('Bonne nuit ' + userAuthString,
           style: TextStyle(
               fontWeight: FontWeight.bold, color: Colors.grey, fontSize: 30));
     } else if (currentHour <= 23 && currentHour >= 18) {
-      return const Text('Bonsoir',
+      return Text('Bonsoir' + userAuthString,
           style: TextStyle(
               fontWeight: FontWeight.bold, color: Colors.grey, fontSize: 30));
     } else {
-      return const Text('Bonjour',
+      return Text('Bonjour' + userAuthString,
           style: TextStyle(
               fontWeight: FontWeight.bold, color: Colors.grey, fontSize: 30));
     }

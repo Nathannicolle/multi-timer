@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_timer/auth/authentication.dart';
 import 'package:multi_timer/composant/timer.dart';
@@ -30,6 +31,8 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
+    final userAuth = FirebaseAuth.instance.currentUser?.email;
+    String userAuthString = userAuth.toString();
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(80.0),
@@ -61,8 +64,8 @@ class _DashboardPageState extends State<DashboardPage> {
           child: Center(
             child: Column(
               children:  <Widget>[
-                Text("Vous êtes connecté", textScaleFactor: 3, style: TextStyle(color: Colors.white)),
-                TextButton(onPressed: () => { AuthenticationProvider.of(context)?.logout() }, child: Text("Déconnexion"))
+                Text("Vous êtes connecté en tant que " + userAuthString, textScaleFactor: 3, style: TextStyle(color: Colors.white)),
+                TextButton(onPressed: () => { AuthenticationProvider.of(context)?.logout() }, child: Text("Déconnexion", style: TextStyle(color: Colors.red)), style: ButtonStyle(overlayColor: MaterialStateProperty.all<Color>(Color.fromRGBO(218, 72, 72, .5))))
               ],
             )
           )
