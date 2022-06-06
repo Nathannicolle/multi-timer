@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/button/gf_button.dart';
+import 'package:multi_timer/pages/groupusers.dart';
 import 'package:searchfield/searchfield.dart';
 
 import '../main.dart';
@@ -9,11 +11,16 @@ import 'groups.dart';
 
 class groupadduser extends StatefulWidget {
 
-  const groupadduser({Key? key, required this.title}) : super(key: key);
+  const groupadduser({Key? key, required this.title, required this.idGroup, required this.listUsersNom, required this.listUsersPrenom, required this.listUsersEmail, required this.listUsers}) : super(key: key);
 
   static const String routeName = "/groupadduser";
 
   final String title;
+  final String idGroup;
+  final List listUsersEmail;
+  final List listUsersNom;
+  final List listUsersPrenom;
+  final List listUsers;
 
   @override
   State<groupadduser> createState() => groupadduserState();
@@ -22,11 +29,13 @@ class groupadduser extends StatefulWidget {
 class groupadduserState extends State<groupadduser> {
 
   int _selectedIndex = 3;
+  int nbUser = 0;
   List listUserNames = ['David', 'George'];
+  final groupUserController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-
+    print(widget.listUsers);
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(80.0),
@@ -77,7 +86,7 @@ class groupadduserState extends State<groupadduser> {
                 suggestionsDecoration: BoxDecoration(
                   color: Color.fromRGBO(57, 57, 57, 1),
                 ),
-                suggestions: listUserNames.map((e) =>
+                suggestions: widget.listUsers.map((e) =>
                     SearchFieldListItem(
                     e,
                     item: e,
@@ -85,10 +94,31 @@ class groupadduserState extends State<groupadduser> {
                     ),
                 )
                 .toList(),
+                controller: groupUserController,
               ),
 
               GFButton(
-                  onPressed: () => {},
+                  onPressed: () => {
+                    print(groupUserController.value.text),
+                    nbUser = 0,
+                    widget.listUsers.forEach((element) {
+                      if(groupUserController.value.text.isEmpty) {
+
+                      } else if(groupUserController.value.text == element) {
+                        FirebaseFirestore.instance.collection('Groups').doc(widget.idGroup).collection('Utilisateurs').add({
+                          'email': widget.listUsersEmail[nbUser],
+                          'firstname': widget.listUsersPrenom[nbUser],
+                          'lastname': widget.listUsersNom[nbUser],
+                        });
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => groupusers(title: '', idGroup: widget.idGroup)),
+                        );
+                      }
+                      nbUser++;
+                    }),
+
+                  },
                   text:"Ajouter",
                   color: Colors.green,
               ),

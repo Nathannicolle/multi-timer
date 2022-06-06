@@ -96,32 +96,6 @@ class groupsState extends State<groups> {
 
           },
         ),
-
-        /*GridView.builder(
-
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 2,
-            mainAxisSpacing: 4,
-            crossAxisSpacing: 4,
-          ),
-          itemCount: listGroupNames.length,
-          itemBuilder: (context, index) {
-            final item = listGroupNames[index];
-
-            return _listGroups(item);
-          },
-
-          //mainAxisSpacing: 10,
-          /*padding: EdgeInsets.all(20),
-          crossAxisCount: 2,
-          children: <Widget>[
-            _listGroups(),
-          ],*/
-
-        ),*/
-
-
       ),
 
         bottomNavigationBar: BottomNavigationBar(
